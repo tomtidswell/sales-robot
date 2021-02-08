@@ -1,8 +1,9 @@
 <template>
   <div>
     <Navigation />
-    <section class="main-content columns">
-      <!-- <aside class="column is-2 section">
+    <nuxt />
+    <!-- <section class="main-content columns">
+      <aside class="column is-2 section">
         <p class="menu-label is-hidden-touch">General</p>
         <ul class="menu-list">
           <li v-for="(item, key) of items" :key="key">
@@ -11,13 +12,11 @@
             </nuxt-link>
           </li>
         </ul>
-      </aside> -->
+      </aside>
 
       <div class="container column is-10">
-        <nuxt />
       </div>
-    </section>
-
+    </section> -->
   </div>
 </template>
 

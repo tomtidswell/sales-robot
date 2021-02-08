@@ -1,38 +1,54 @@
 <template>
   <b-navbar :mobile-burger="true">
     <template slot="brand">
-      <b-navbar-item tag="router-link" :to="{ path: '/' }">
+      <b-navbar-item tag="NuxtLink" :to="{ path: '/' }">
         <header class="logo-set" @click.meta.right="enableAdmin">
-          <div class="sale">Sale</div>
-          <div class="robot">Robot</div>
+          <div class="sale">
+            Sale
+          </div>
+          <div class="robot">
+            Robot
+          </div>
         </header>
       </b-navbar-item>
     </template>
     <template slot="start">
-      <b-navbar-item tag="router-link" :to="{ path: '/' }">
+      <b-navbar-item tag="NuxtLink" :to="{ path: '/' }">
         <b-icon icon="magnify" size="is-small" />
       </b-navbar-item>
       <b-navbar-dropdown label="Categories" arrowless hoverable boxed>
         <b-navbar-item
           v-for="(data, name) in categories"
           :key="name"
-          tag="router-link"
-          :to="{ path: `/category/${data.websafeName}` }"> {{data.displayName}} </b-navbar-item>
+          tag="NuxtLink"
+          :to="{ path: `/category?${data.websafeName}` }"
+        >
+          {{ data.displayName }}
+        </b-navbar-item>
       </b-navbar-dropdown>
       <b-navbar-dropdown label="Shops" arrowless hoverable boxed>
         <b-navbar-item
           v-for="(data, name) in retailers"
           :key="name"
-          tag="router-link"
-          :to="{ path: `/retailer/${data.websafeName}` }"> {{data.displayName}} </b-navbar-item>
+          tag="NuxtLink"
+          :to="{ path: `/retailer?${data.websafeName}` }"
+        >
+          {{ data.displayName }}
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
 
     <template slot="end">
       <b-navbar-dropdown label="Admin" arrowless hoverable boxed right>
-        <b-navbar-item tag="router-link" :to="{ path: '/scraping/history' }"> Scrape history </b-navbar-item>
-        <b-navbar-item tag="router-link" :to="{ path: '/scraping/settings' }" v-if="admin"> Scrape settings </b-navbar-item>
-        <b-navbar-item tag="router-link" :to="{ path: '/admin/categorymap' }" v-if="admin"> Category map config </b-navbar-item>
+        <b-navbar-item tag="NuxtLink" :to="{ path: '/scraping/history' }">
+          Scrape history
+        </b-navbar-item>
+        <b-navbar-item v-if="admin" tag="NuxtLink" :to="{ path: './scraping/settings' }">
+          Scrape settings
+        </b-navbar-item>
+        <b-navbar-item v-if="admin" tag="NuxtLink" :to="{ path: './admin/categorymap' }">
+          Category map config
+        </b-navbar-item>
       </b-navbar-dropdown>
       <b-navbar-item tag="div">
         <div class="buttons">
@@ -49,10 +65,6 @@ import { retailerConfig, categoryConfig } from '../assets/config'
 
 export default {
   name: 'Navigation',
-  components: {},
-  props: {
-    msg: String
-  },
   data () {
     return {
       admin: false,
@@ -73,7 +85,7 @@ export default {
   },
   methods: {
     enableAdmin () {
-      console.log('Enabling admin')
+      // console.log('Enabling admin')
       this.admin = !this.admin
     }
   }
