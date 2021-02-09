@@ -161,7 +161,7 @@ export default {
   },
   methods: {
     async getData () {
-      const res = await fetch('../api/scrapesettings')
+      const res = await fetch('https://sharp-turing-vue.netlify.app/api/scrapesettings')
       console.log('Endpoint response:', res)
       this.scrapeDataResponse = res.status === 200 ? await res.json() : []
       this.scrapeData = _.map(this.scrapeDataResponse, (i) => {
@@ -180,7 +180,7 @@ export default {
       this.editingRowData = _.clone(row)
     },
     async handleDeleteClick ({ row }) {
-      const res = await fetch(`../api/scrapesettings/${row._id}`, {
+      const res = await fetch(`https://sharp-turing-vue.netlify.app/api/scrapesettings/${row._id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
       })
@@ -208,7 +208,7 @@ export default {
       console.log('Saving edit:', this.editingRowData)
       this.editSaveWaiting = true
       // send the new data to the endpoint
-      const res = await fetch(`../api/scrapesettings/${this.editingRowData._id}`, {
+      const res = await fetch(`https://sharp-turing-vue.netlify.app/api/scrapesettings/${this.editingRowData._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(this.editingRowData)

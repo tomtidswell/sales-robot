@@ -16,13 +16,19 @@ import _ from 'lodash'
 export default {
   name: 'Scrapes',
   components: {},
-  props: {
-    retailer: String
+  async asyncData () {
+    const res = await fetch('https://sharp-turing-vue.netlify.app/api/scrapes')
+    console.log('Endpoint response:', res)
+    const resJson = res.status === 200 ? await res.json() : []
+    const scrapeData = _.map(resJson, (i) => {
+      i.date = new Date(i.createdAt).toLocaleString()
+      return i
+    })
+    console.log('Data:', scrapeData)
+    return { scrapeData }
   },
   data () {
     return {
-      message: 'Hello',
-      scrapeDataResponse: [],
       scrapeData: [],
       columns: [
         // {
@@ -58,20 +64,12 @@ export default {
 
     }
   },
-  computed: {
-    retailers () {
-      return null// retailer_config
-    },
-    retailerData () {
-      return this.retailers[this.retailer] || {}
-    }
-  },
-  created () {
-    this.getData()
+  mounted () {
+    console.log(process)
   },
   methods: {
     async getData () {
-      const res = await fetch('../api/scrapes')
+      const res = await fetch('https://sharp-turing-vue.netlify.app/api/scrapes')
       console.log('Endpoint response:', res)
       this.scrapeDataResponse = res.status === 200 ? await res.json() : []
       this.scrapeData = _.map(this.scrapeDataResponse, (i) => {

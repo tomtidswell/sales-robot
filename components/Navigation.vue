@@ -40,13 +40,13 @@
 
     <template slot="end">
       <b-navbar-dropdown label="Admin" arrowless hoverable boxed right>
-        <b-navbar-item tag="NuxtLink" :to="{ path: '/scraping/history' }">
+        <b-navbar-item tag="NuxtLink" :to="{ path: '/scrape-history' }">
           Scrape history
         </b-navbar-item>
-        <b-navbar-item v-if="admin" tag="NuxtLink" :to="{ path: './scraping/settings' }">
+        <b-navbar-item v-if="admin" tag="NuxtLink" :to="{ path: './scrape-settings' }">
           Scrape settings
         </b-navbar-item>
-        <b-navbar-item v-if="admin" tag="NuxtLink" :to="{ path: './admin/categorymap' }">
+        <b-navbar-item v-if="admin" tag="NuxtLink" :to="{ path: './category-map' }">
           Category map config
         </b-navbar-item>
       </b-navbar-dropdown>
